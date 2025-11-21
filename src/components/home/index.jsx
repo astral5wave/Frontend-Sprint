@@ -19,7 +19,6 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-100 to-slate-200 p-6 flex items-center justify-center">
       <div className="w-full max-w-5xl h-[85vh] bg-white rounded-2xl shadow-xl border border-slate-200 flex overflow-hidden">
-        {/* Sidebar */}
         <aside className="w-64 bg-slate-50 border-r border-slate-200 p-5 flex flex-col gap-5">
           <div className="text-xl font-semibold text-slate-700">Mini Projects</div>
 
@@ -55,8 +54,6 @@ const Index = () => {
             Tip: click a card to open the project.
           </div>
         </aside>
-
-        {/* Main content */}
         <main className="flex-1 p-6 flex flex-col overflow-auto">
           <div className="flex items-center justify-between mb-4">
             <div className="text-sm text-slate-500">
@@ -68,7 +65,6 @@ const Index = () => {
           </div>
 
           <div className="flex-1 min-h-0">
-            {/* List view */}
             {view === "list" ? (
               <div className="flex flex-col gap-3 overflow-y-auto min-h-0 pr-2 scrollbar-thin scrollbar-thumb-slate-300 hover:scrollbar-thumb-slate-400 scrollbar-track-transparent">
                 {filtered.map((item, i) => (
@@ -76,7 +72,7 @@ const Index = () => {
                     to={item.path}
                     key={i}
                     className={({ isActive }) =>
-                      `group block rounded-lg border p-4 flex items-center gap-4 transition-colors duration-150 ${
+                      `group  rounded-lg border p-4 flex items-center gap-4 transition-colors duration-150 mb-1 ${
                         isActive
                           ? "bg-slate-900 text-white border-slate-800"
                           : "bg-white hover:bg-slate-50 border-slate-200"
@@ -105,7 +101,6 @@ const Index = () => {
                 )}
               </div>
             ) : (
-              // Grid view
               <div className="h-full overflow-y-auto min-h-0 pr-2 scrollbar-thin scrollbar-thumb-slate-300 hover:scrollbar-thumb-slate-400 scrollbar-track-transparent">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                   {filtered.map((item, i) => (
@@ -113,7 +108,7 @@ const Index = () => {
                       to={item.path}
                       key={i}
                       className={({ isActive }) =>
-                        `block rounded-lg border p-4 h-full flex flex-col justify-between transition-all ${
+                        ` rounded-lg border p-4 h-full flex flex-col justify-between transition-all ${
                           isActive
                             ? "bg-slate-900 text-white border-slate-800"
                             : "bg-white hover:bg-slate-50 border-slate-200"

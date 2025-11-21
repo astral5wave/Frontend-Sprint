@@ -65,7 +65,6 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col p-6">
       <div className="grid grid-cols-3 gap-6 flex-grow">
-        {/* Summary Card */}
         <div className="col-span-1 flex flex-col items-center justify-center bg-white rounded-2xl shadow-lg p-6">
           <div className="text-xl font-semibold text-gray-700 mb-2">Total Income</div>
           <div className="text-3xl font-bold text-green-600 mb-6">{state.income}</div>
@@ -73,7 +72,6 @@ const Index = () => {
           <div className="text-3xl font-bold text-red-600">{state.expense}</div>
         </div>
 
-        {/* Chart Section */}
         <div className="col-span-1 flex items-center justify-center bg-white rounded-2xl shadow-lg">
           <PieChart
             series={[
@@ -101,7 +99,6 @@ const Index = () => {
           />
         </div>
 
-        {/* Input Section */}
         <div className="col-span-1 flex flex-col justify-center bg-white rounded-2xl shadow-lg p-6">
           <div className="text-lg font-semibold text-gray-700 mb-4">Add Transaction</div>
           <input
@@ -147,9 +144,7 @@ const Index = () => {
         </div>
       </div>
 
-      {/* Lists */}
       <div className="mt-6 grid grid-cols-2 gap-6 flex-grow">
-        {/* Income List */}
         <div className="bg-white rounded-2xl shadow-lg p-4 overflow-y-auto max-h-72">
           <div className="text-lg font-semibold text-gray-700 mb-2">Income List</div>
           {[...incomeMap].map(([id, { amount, remark }]) => (
@@ -173,7 +168,6 @@ const Index = () => {
           ))}
         </div>
 
-        {/* Expense List */}
         <div className="bg-white rounded-2xl shadow-lg p-4 overflow-y-auto max-h-72">
           <div className="text-lg font-semibold text-gray-700 mb-2">Expense List</div>
           {[...expenseMap].map(([id, { amount, remark }]) => (

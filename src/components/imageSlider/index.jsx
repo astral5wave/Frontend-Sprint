@@ -1,64 +1,71 @@
-import React, { useEffect } from "react";
-import arr from "./images/arr.js";
+import React, { useEffect, useState } from "react";
 import {
   FaArrowAltCircleLeft,
   FaArrowAltCircleRight,
   FaCircle,
 } from "react-icons/fa";
-const circle = [
-  <FaCircle />,
-  <FaCircle />,
-  <FaCircle />,
-  <FaCircle />,
-  <FaCircle />,
-  <FaCircle />,
-  <FaCircle />,
-];
+
 const ImageSlider = () => {
-  const imgArr = arr;
-  const [imagePointer, setImagePointer] = React.useState(0);
-  React.useEffect(() => {
-    imgArr.map((i) => {
-      let img = new Image();
-      img.src = i;
-    });
+  const [images, setImages] = useState([]);
+  const [imagePointer, setImagePointer] = useState(0);
+  const total = 7;
+
+  useEffect(() => {
+    const fetchImages = async () => {
+      const urls = [];
+      for (let i = 0; i < total; i++) {
+        urls.push(`https://picsum.photos/800/600?random=${i + 1}`);
+      }
+      setImages(urls);
+    };
+
+    fetchImages();
   }, []);
+  useEffect(() => {
+    images.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, [images]);
+
+  if (images.length === 0) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <p>Loading images...</p>
+      </div>
+    );
+  }
+
   return (
     <div className="flex items-center justify-center h-screen w-screen">
-      <div className="h-[500px] w-[700px] relative overflow-hidden">
+      <div className="h-[500px] w-[700px] relative overflow-hidden bg-gray-200">
         <img
-          src={imgArr[imagePointer]}
+          src={images[imagePointer]}
+          alt="random"
           className="object-cover h-full w-full"
         />
+
         <button
-          className="px-4 py-2 absolute top-[45%] left-0 text-gray-100"
-          onClick={() =>
-            setImagePointer((imagePointer) => (imagePointer - 1 + 7) % 7)
-          }
+          className="absolute top-1/2 left-2 transform -translate-y-1/2 text-gray-800"
+          onClick={() => setImagePointer((prev) => (prev - 1 + total) % total)}
         >
-          <FaArrowAltCircleLeft size={40} />
+          <FaArrowAltCircleLeft size={32} />
         </button>
+
         <button
-          className="px-4 py-2 absolute top-[45%] right-0 text-gray-100"
-          onClick={() =>
-            setImagePointer((imagePointer) => (imagePointer + 1 + 7) % 7)
-          }
+          className="absolute top-1/2 right-2 transform -translate-y-1/2 text-gray-800"
+          onClick={() => setImagePointer((prev) => (prev + 1) % total)}
         >
-          <FaArrowAltCircleRight size={40} />
+          <FaArrowAltCircleRight size={32} />
         </button>
-        <div className="flex items-center gap-4 absolute bottom-4 left-[250px]">
-          {circle.map((item, i) => {
-            return (
-              <span
-                key={i}
-                className={`${
-                  i == imagePointer ? "text-gray-100" : "text-gray-400"
-                }`}
-              >
-                {item}
-              </span>
-            );
-          })}
+
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
+          {images.map((_, i) => (
+            <FaCircle
+              key={i}
+              className={i === imagePointer ? "text-gray-800" : "text-gray-400"}
+            />
+          ))}
         </div>
       </div>
     </div>
